@@ -22,6 +22,9 @@ DB_NAME=***
 ### 4. start server:
 ``$ yarn start``
 
+### 5. Access the Api documentation
+import the [Insomnia file](api_documentation/Insomnia_2022-03-28.json) to Insomnia or Postman
+
 -----------
 ### Environment Variables in Windows
 https://www.edureka.co/community/77202/how-can-i-set-node-env-production-on-windows
