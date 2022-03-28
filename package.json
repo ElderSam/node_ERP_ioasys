@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node main",
-    "dev": "nodemon main --ignore __tests__"
+    "dev": "nodemon main --ignore __tests__",
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.17.3",

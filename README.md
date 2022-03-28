@@ -33,11 +33,23 @@ after create your table you can access in pgAdmin -> Databases -> 'your_database
 ------------------------------------
 
 ## Libraries
+
+# [Jest](https://jestjs.io/)
+
+Node.js unit tests, mocks, coverage, etc.
+
+1. install jest
+``yarn add jest -D``
+
+2. Jest Init
+``yarn jest --init``
+
+---------
 ### Sequelize
 It is an ORM that makes it easier for us to deal with the data and tables of our Database, using `Javascript` syntax instead of `SQL`.
 
-### pg
+#### pg
 lib for sequelize to handle PostgreSQL Database
 
-### sequelize-cli;
+#### sequelize-cli;
 Helps to deal with the creation of migrations, which are the files that will control the version of our DB tables
