@@ -1,6 +1,10 @@
 # node_ERP_ioasys
 
 ## Start
+### 1. install dependencies:
+``$ yarn install``
+
+### 2. connect your database (PostgreSQL)
 
 NOTE: you should create your `.env` file.
 example; 
@@ -9,7 +13,16 @@ DB_HOST=127.0.0.1
 DB_USER=***
 DB_PASS=***
 DB_NAME=***
-``
+```
+
+### 3. start server:
+``$ yarn start``
+
+-----------
+### Environment Variables in Windows
+https://www.edureka.co/community/77202/how-can-i-set-node-env-production-on-windows
+
+----------
 
 ## Project structure
 Inside `src/`;
