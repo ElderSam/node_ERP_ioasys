@@ -17,8 +17,18 @@ Inside `src/`;
 ``yarn sequelize init``
 creates files `config/config.json` & `models/index.js` & the emptys folders `migrations/` and `seeders/`;
 
-### running migrations
+### Create migrations
 ``yarn sequelize migration:create --name=create-users``
+
+### Create a Database in PostgreSQL
+If you are using postgreSQL & pgAdmin;
+Create a new database in PgAdmin
+NOTE: you can change the username & password in `src/config/database.js` and the database name must be the same name
+
+### running migrations
+``yarn sequelize db:migrate``
+create tables in the database if they don't exist & update database
+after create your table you can access in pgAdmin -> Databases -> 'your_database' -> Schemas -> public -> Tables
 
 ------------------------------------
 
