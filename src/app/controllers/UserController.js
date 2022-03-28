@@ -68,6 +68,57 @@ async function create(req, res) {
 	}
 }
 
+async function update(req, res) {
+	const id = parseInt(req.params.id)
+	if(id != req.userId) { // update my user
+		await verifyUserIsAdmin(req, res);
+	}
+
+	const loggedUser = await User.findOne({ where: { id: req.userId } });
+	if(!loggedUser.dataValues.is_admin) { // if the logged user is not admin
+		delete req.body.is_admin
+	}
+	return updateUser(req, res);
+}
+
+async function updateUser(req, res) {
+	const id = parseInt(req.params.id)
+	const { name, email, password, is_admin } = req.body;
+	const userData = { name, email, password, is_admin };
+
+	const auxData = { ...userData };
+	delete auxData.is_admin;
+	const errors = validateFields(auxData);
+
+	if (errors.length > 0) {
+		const errorStr = errors.toString().replaceAll(",", ", ");
+
+		return res
+			.status(400)
+			.json({ message: `required fields: ${errorStr}` });
+	}
+
+	const user = await User.findOne({ where: { email } });
+
+	if (user && user.dataValues && (user.dataValues.id !== id)) {
+		return res.status(422).json({
+			message: "There is already a registered user with this email",
+		});
+	}
+
+	try {
+		const updUser = await User.update(userData, { where: { id } });
+		if(updUser[0] === 1)
+			return res.status(200).send({});
+
+	} catch (err) {
+		return res.status(500).json({
+			message:
+				"Error when trying to update user into database. " + err,
+		});
+	}
+}
+
 async function list(req, res) {
 	const users = await User.findAll();
 
@@ -79,7 +130,7 @@ async function list(req, res) {
 	return res.status(200).send({ users: listRes });
 }
 
-async function listById(req, res) {
+async function listById(req, res, id=false) {
 	const user = await User.findOne({ where: { id: req.params.id } });
 	delete user.dataValues.password_hash;
 
@@ -95,4 +146,4 @@ async function myUserInfo(req, res) {
 	return res.status(200).send({ user });
 }
 
-module.exports = { create, list, verifyUserIsAdmin, listById, myUserInfo }; // UserController
+module.exports = { create, list, verifyUserIsAdmin, listById, myUserInfo, update }; // UserController

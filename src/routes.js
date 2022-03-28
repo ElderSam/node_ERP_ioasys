@@ -18,6 +18,8 @@ routes.get('/dashboard', (req, res) => {
 })
 routes.get('/users/me', UserController.myUserInfo)
 
+routes.put('/users/:id', UserController.update)
+
 /* --------- Admin routes ---------  */
 routes.use(adminMiddleware)
 
