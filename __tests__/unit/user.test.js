@@ -16,8 +16,8 @@ describe("", () => {
 			isAdmin: 0
 		});
 
-		const hash = await bcrypt.hash("123456", 8);
+		const compareHash = await bcrypt.compare('123456', user.password_hash)
 
-        expect(user.password_hash).toBe(hash);
+        expect(compareHash).toBe(true);
 	});
 });
