@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 			email: DataTypes.STRING,
 			password: DataTypes.VIRTUAL,
 			password_hash: DataTypes.STRING,
-			// isAdmin: DataTypes.STRING,
+			is_admin: DataTypes.INTEGER,
 		},
 		{
 			hooks: {
@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
 						);
 					}
 
-					if (!user.isAdmin) {
-						user.isAdmin = 0;
+					if (!user.is_admin) {
+						user.is_admin = 0;
 					}
 				},
 			},

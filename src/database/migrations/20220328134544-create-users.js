@@ -26,7 +26,7 @@ module.exports = {
 				allowNull: false,
 			},
 
-			isAdmin: {
+			is_admin: {
 				type: Sequelize.INTEGER,
 				defaultValue: 0,
 				allowNull: false,

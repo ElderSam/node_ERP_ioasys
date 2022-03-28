@@ -1,11 +1,13 @@
 const routes = require("express").Router();
 
 const SessionController = require('./app/controllers/SessionController')
+const UserController = require('./app/controllers/UserController')
 const authMiddleware = require('./app/middleware/auth');
 
 // Routes definition
 routes.get('/', (req, res) => res.status(200).send('Server running!'))
 routes.post('/sessions', SessionController.store)
+routes.post('/user', UserController.create)
 
 /* ------------------ Authenticated routes ------------------ */
 routes.use(authMiddleware)
