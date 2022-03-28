@@ -4,7 +4,8 @@
   "main": "src/server.js",
   "license": "MIT",
   "scripts": {
-    "start": "node main"
+    "start": "node main",
+    "dev": "nodemon main"
   },
   "dependencies": {
     "express": "^4.17.3",
@@ -12,6 +13,7 @@
     "sequelize": "^6.17.0"
   },
   "devDependencies": {
+    "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1"
   }
 }
