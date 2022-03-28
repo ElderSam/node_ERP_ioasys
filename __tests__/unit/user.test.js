@@ -11,9 +11,9 @@ describe("", () => {
 	it("should encrypt user password", async () => {
 		const user = await User.create({
 			name: "Samuel",
-			email: "sam@gmail.com",
+			email: "test@gmail.com",
 			password: "123456",
-			isAdmin: 0
+			// isAdmin: 0,
 		});
 
 		const compareHash = await bcrypt.compare('123456', user.password_hash)

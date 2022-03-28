@@ -31,6 +31,7 @@ describe("Authentication", () => {
 			name: "Samuel",
 			email: "test@gmail.com.br",
 			password: "123123",
+			// isAdmin: 0
 		});
 
 		const response = await request(app).post("/sessions").send({
@@ -39,5 +40,22 @@ describe("Authentication", () => {
 		});
 
 		expect(response.status).toBe(401);
+	});
+
+	it("should return JWT token when authenticated", async () => {
+		const user = await User.create({
+			name: "Samuel",
+			email: "sam@gmail.com",
+			password: "123123",
+		});
+
+		const response = await request(app)
+			.post("/sessions")
+			.send({
+				email: user.email,
+				password: "123123",
+			});
+
+		expect(response.body).toHaveProperty('token');
 	});
 });
