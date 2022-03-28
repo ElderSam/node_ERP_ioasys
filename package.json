@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node main",
     "dev": "nodemon main --ignore __tests__",
-    "test": "jest"
+    "pretest": "NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
