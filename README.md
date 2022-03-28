@@ -15,7 +15,11 @@ DB_PASS=***
 DB_NAME=***
 ```
 
-### 3. start server:
+### 3. run the migrations
+``$ yarn install sequelize -g``
+``$ yarn sequelize db:migrate`` 
+
+### 4. start server:
 ``$ yarn start``
 
 -----------

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 			email: DataTypes.STRING,
 			password: DataTypes.VIRTUAL,
 			password_hash: DataTypes.STRING,
-			isAdmin: DataTypes.ENUM(0, 1),
+			// isAdmin: DataTypes.STRING,
 		},
 		{
 			hooks: {
@@ -19,10 +19,21 @@ module.exports = (sequelize, DataTypes) => {
 							8
 						);
 					}
+
+					if(!user.isAdmin) {
+						user.isAdmin = 0;
+					}
 				},
 			},
 		}
 	);
 
+	User.prototype.checkPassword = function (password) {
+		return bcrypt.compare(password, this.password_hash);
+	};
+
+	// User.prototype.generateToken = function() {
+	// 	return jwt.sign({ id: this.id }, process.env.APP_SECRET)
+	// }
 	return User;
 };
