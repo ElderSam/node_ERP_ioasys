@@ -1,10 +1,17 @@
-describe("Example", () => {
-	it("should sum two numbers", () => {
-		const x = 2;
-		const y = 4;
+const { User } = require('../../src/app/models');
 
-		const sum = x + y;
+describe("Authentication", () => {
+	it("should create a user", async () => {
+		const emailTest = 'test@gmail.com.br'
 
-		expect(sum).toBe(6);
+		const user = await User.create({
+			name: 'Samuel',
+			email: emailTest,
+			password_hash: "123123"
+		})
+
+		console.log(user)
+
+		expect(user.email).toBe(emailTest);
 	});
-})
+});
