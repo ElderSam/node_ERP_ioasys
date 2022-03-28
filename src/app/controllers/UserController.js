@@ -69,20 +69,22 @@ async function create(req, res) {
 }
 
 async function update(req, res) {
-	const id = parseInt(req.params.id)
-	if(id != req.userId) { // update my user
+	const id = parseInt(req.params.id);
+	if (id != req.userId) {
+		// update my user
 		await verifyUserIsAdmin(req, res);
 	}
 
 	const loggedUser = await User.findOne({ where: { id: req.userId } });
-	if(!loggedUser.dataValues.is_admin) { // if the logged user is not admin
-		delete req.body.is_admin
+	if (!loggedUser.dataValues.is_admin) {
+		// if the logged user is not admin
+		delete req.body.is_admin;
 	}
 	return updateUser(req, res);
 }
 
 async function updateUser(req, res) {
-	const id = parseInt(req.params.id)
+	const id = parseInt(req.params.id);
 	const { name, email, password, is_admin } = req.body;
 	const userData = { name, email, password, is_admin };
 
@@ -100,7 +102,7 @@ async function updateUser(req, res) {
 
 	const user = await User.findOne({ where: { email } });
 
-	if (user && user.dataValues && (user.dataValues.id !== id)) {
+	if (user && user.dataValues && user.dataValues.id !== id) {
 		return res.status(422).json({
 			message: "There is already a registered user with this email",
 		});
@@ -108,13 +110,10 @@ async function updateUser(req, res) {
 
 	try {
 		const updUser = await User.update(userData, { where: { id } });
-		if(updUser[0] === 1)
-			return res.status(200).send({});
-
+		if (updUser[0] === 1) return res.status(200).send({});
 	} catch (err) {
 		return res.status(500).json({
-			message:
-				"Error when trying to update user into database. " + err,
+			message: "Error when trying to update user into database. " + err,
 		});
 	}
 }
@@ -130,7 +129,7 @@ async function list(req, res) {
 	return res.status(200).send({ users: listRes });
 }
 
-async function listById(req, res, id=false) {
+async function listById(req, res, id = false) {
 	const user = await User.findOne({ where: { id: req.params.id } });
 	delete user.dataValues.password_hash;
 
@@ -138,7 +137,8 @@ async function listById(req, res, id=false) {
 }
 
 async function myUserInfo(req, res) {
-	if(!req.userId) res.status(500).send({ message: 'error: userId not defined' })
+	if (!req.userId)
+		res.status(500).send({ message: "error: userId not defined" });
 
 	const user = await User.findOne({ where: { id: req.userId } });
 	delete user.dataValues.password_hash;
@@ -146,4 +146,19 @@ async function myUserInfo(req, res) {
 	return res.status(200).send({ user });
 }
 
-module.exports = { create, list, verifyUserIsAdmin, listById, myUserInfo, update }; // UserController
+async function deleteById(req, res) {
+	if (!req.params.id) res.status(500).send({ message: "id not provided" });
+
+	await User.destroy({ where: { id: req.params.id } })
+	return res.status(200).send({});
+}
+
+module.exports = {
+	create,
+	list,
+	verifyUserIsAdmin,
+	listById,
+	myUserInfo,
+	update,
+	deleteById,
+}; // UserController

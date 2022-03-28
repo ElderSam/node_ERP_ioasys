@@ -25,5 +25,6 @@ routes.use(adminMiddleware)
 
 routes.get('/users', UserController.list)
 routes.get('/users/:id', UserController.listById)
+routes.delete('/users/:id', UserController.deleteById)
 
 module.exports = routes;
