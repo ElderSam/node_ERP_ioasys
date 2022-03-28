@@ -1,5 +1,15 @@
 # node_ERP_ioasys
 
+## Start
+
+NOTE: you should create your `.env` file.
+example; 
+```
+DB_HOST=127.0.0.1
+DB_USER=***
+DB_PASS=***
+DB_NAME=***
+``
 
 ## Project structure
 Inside `src/`;
