@@ -69,14 +69,30 @@ async function create(req, res) {
 }
 
 async function list(req, res) {
-	const users = await User.findAll()
+	const users = await User.findAll();
 
 	const listRes = users.map(({ dataValues }) => {
-		delete dataValues.password_hash
-		return dataValues
-	})
+		delete dataValues.password_hash;
+		return dataValues;
+	});
 
 	return res.status(200).send({ users: listRes });
 }
 
-module.exports = { create, list, verifyUserIsAdmin }; // UserController
+async function listById(req, res) {
+	const user = await User.findOne({ where: { id: req.params.id } });
+	delete user.dataValues.password_hash;
+
+	return res.status(200).send({ user });
+}
+
+async function myUserInfo(req, res) {
+	if(!req.userId) res.status(500).send({ message: 'error: userId not defined' })
+
+	const user = await User.findOne({ where: { id: req.userId } });
+	delete user.dataValues.password_hash;
+
+	return res.status(200).send({ user });
+}
+
+module.exports = { create, list, verifyUserIsAdmin, listById, myUserInfo }; // UserController

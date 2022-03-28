@@ -16,10 +16,12 @@ routes.use(authMiddleware)
 routes.get('/dashboard', (req, res) => {
     res.status(200).send()
 })
+routes.get('/users/me', UserController.myUserInfo)
 
 /* --------- Admin routes ---------  */
 routes.use(adminMiddleware)
 
 routes.get('/users', UserController.list)
+routes.get('/users/:id', UserController.listById)
 
 module.exports = routes;
