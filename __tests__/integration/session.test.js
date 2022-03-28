@@ -11,16 +11,16 @@ describe("Authentication", () => {
 
 	it("should authenticate with valid credentials", async () => {
 		const user = await User.create({
-			name: "Diego",
-			email: "diego@rocketseat.com.br",
-			password_hash: "123123",
+			name: "Samuel",
+			email: "test@gmail.com.br",
+			password: "123123",
 		});
 
-		expect(user.email).toBe("diego@rocketseat.com.br")
+		expect(user.email).toBe("test@gmail.com.br")
 
 		const response = await request(app).post("/sessions").send({
 			email: user.email,
-			password: "123456",
+			password: "123123",
 		});
 
 		expect(response.status).toBe(200);
