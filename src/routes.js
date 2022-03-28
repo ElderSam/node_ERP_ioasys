@@ -3,6 +3,7 @@ const routes = require("express").Router();
 const SessionController = require('./app/controllers/SessionController')
 const UserController = require('./app/controllers/UserController')
 const authMiddleware = require('./app/middleware/auth');
+const adminMiddleware = require('./app/middleware/admin');
 
 // Routes definition
 routes.get('/', (req, res) => res.status(200).send('Server running!'))
@@ -15,5 +16,10 @@ routes.use(authMiddleware)
 routes.get('/dashboard', (req, res) => {
     res.status(200).send()
 })
+
+/* --------- Admin routes ---------  */
+routes.use(adminMiddleware)
+
+routes.get('/users', UserController.list)
 
 module.exports = routes;
