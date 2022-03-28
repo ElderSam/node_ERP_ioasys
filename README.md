@@ -7,6 +7,22 @@ Inside `src/`;
 ``server.js`` => allocate ports
 ``routes.js`` => application routes
 
+-----------
+
+## Tests with Jest
+https://jestjs.io/
+Node.js unit tests, mocks, coverage, etc.
+
+1. install jest
+``yarn add jest -D``
+
+2. Jest Init
+``yarn jest --init``
+
+3. configure your `jest.config.js` & create your test in __tests__/integration or ___tests__/unit
+4. run your tests
+``yarn jest``
+
 ----------------------------------------------
 ## Working with Sequelize
 ### Instaling sequelize & other libs
@@ -34,7 +50,7 @@ after create your table you can access in pgAdmin -> Databases -> 'your_database
 
 ## Libraries
 
-# [Jest](https://jestjs.io/)
+### [Jest](https://jestjs.io/)
 
 Node.js unit tests, mocks, coverage, etc.
 
