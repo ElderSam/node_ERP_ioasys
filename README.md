@@ -15,9 +15,11 @@ DB_PASS=***
 DB_NAME=***
 ```
 
-### 3. run the migrations
-``$ yarn install sequelize -g``
-``$ yarn sequelize db:migrate`` 
+### 3. run Migrations & Seeds
+If you don't have sequelize globally installed globally: ``$ yarn install sequelize -g``
+
+run migrations: ``$ yarn sequelize db:migrate``
+run seeds: ``yarn sequelize-cli db:seed:all``
 
 ### 4. start server:
 ``$ yarn start``
@@ -63,8 +65,12 @@ Node.js unit tests, mocks, coverage, etc.
 ``yarn sequelize init``
 creates files `config/config.json` & `models/index.js` & the emptys folders `migrations/` and `seeders/`;
 
-### Create migrations
+### [Migrations & Seeds](https://medium.com/@diomalta/migrations-e-seeders-no-sequelizejs-67ba3571ed0e)
+#### Create migrations
 ``yarn sequelize migration:create --name=create-users``
+
+#### Create Seeds
+``yarn sequelize seed:generate --name users``
 
 ### Create a Database in PostgreSQL
 If you are using postgreSQL & pgAdmin;
