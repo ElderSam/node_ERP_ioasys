@@ -27,6 +27,12 @@ run seeds: ``yarn sequelize-cli db:seed:all``
 ### 5. Access the Api documentation
 import the [Insomnia file](api_documentation/Insomnia_2022-03-28.json) to Insomnia or Postman
 
+OBS: You can do login with the credentials (admin user): 
+```
+email: teste@gmail.com
+password: nodeERP2803
+```
+
 -----------
 ### Environment Variables in Windows
 https://www.edureka.co/community/77202/how-can-i-set-node-env-production-on-windows
